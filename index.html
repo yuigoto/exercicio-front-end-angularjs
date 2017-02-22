@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    
+    <title>Exercício Front-End Glambox</title>
+    
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="bower_components/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300">
+    <link rel="stylesheet" href="styles/dashboard.css">
+</head>
+<body data-ng-app="dashboardApp" data-ng-controller="mainController">
+
+<!-- LAYOUT BEGIN -->
+<div class="mdl-layout mdl-js-layout mdl-color--blue-50 mdl-layout--fixed-header mdl-layout--fixed-tabs mdl-layout--fixed-drawer">
+    <!-- HEADER -->
+    <div class="mdl-layout__header mdl-color--blue-800 mdl-tabs">
+        <div class="mdl-layout__header-row">
+            <span class="mdl-layout-title">
+                Test Dashboard
+            </span>
+        </div>
+    
+        <div id="tab-nav" class="mdl-layout__tab-bar mdl-color--blue-400 mdl-js-ripple-effect">
+            <a ng-click="clickFetch()" href="#overview" class="mdl-layout__tab is-active">Overview</a>
+            <a ng-click="clickFetch()" href="#mantidas" class="mdl-layout__tab">Mantidas</a>
+            <a ng-click="clickFetch()" href="#conquistadas" class="mdl-layout__tab">Conquistadas</a>
+            <a ng-click="clickFetch()" href="#pendentes" class="mdl-layout__tab">Pendentes</a>
+            <a ng-click="clickFetch()" href="#perdidas" class="mdl-layout__tab">Perdidas</a>
+        </div>
+    </div>
+    
+    <!-- DRAWER | SIDE-MENU -->
+    <div class="mdl-layout__drawer">
+        <h4 class="mdl-layout-title mdl-typography--display-4 sidebar-name">
+            Menu
+        </h4>
+        
+        <div class="avatar-image">
+            <img src="http://placehold.it/160x160" alt="">
+        </div>
+        
+        <!-- DRAWER NAVIGATION -->
+        <div class="mdl-navigation">
+            <a href="#" class="mdl-navigation__link">
+                <i class="material-icons md-dark">face</i>
+                Perfil
+            </a>
+            <a href="#" class="mdl-navigation__link">
+                <i class="material-icons md-dark">search</i>
+                Visão Geral
+            </a>
+            <a href="#" class="mdl-navigation__link">
+                <i class="material-icons md-dark">file_download</i>
+                Downloads
+            </a>
+            <a href="#" class="mdl-navigation__link">
+                <i class="material-icons md-dark">power_settings_new</i>
+                Logout
+            </a>
+            <a href="#" class="mdl-navigation__link">
+                <i class="material-icons md-dark">help</i>
+                Ajuda
+            </a>
+        </div>
+    </div>
+    
+    <!-- TABBED CONTENT -->
+    <div id="tabbed-content" class="mdl-layout__content">
+        <!-- Overview -->
+        <section class="mdl-layout__tab-panel is-active" id="overview">
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop mdl-card mdl-shadow--4dp wide-card">
+                    <div class="mdl-card__title head-card">
+                        <h2 class="mdl-card__title-text">Visão Geral</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <p><strong>Total de Assinaturas: {{graphOverview.total}}</strong></p>
+                    </div>
+                    <div class="mdl-grid inner-grid">
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <canvas class="chart chart-horizontal-bar" chart-data="graphOverview.data" chart-labels="graphOverview.labels" chart-options="graphOverview.options"></canvas>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <table class="mdl-data-table mdl-js-data-table wide-table">
+                                <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Assinantes (%)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(key, value) in graphOverview.data_table">
+                                    <td>{{key}}</td>
+                                    <td>{{value}} <em>({{100*(value/graphOverview.total) | number: 2}}%)</em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-textfield--align-right">
+                        <a ng-click="clickError()" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">highlight_off</i>
+                            Simular Falha (Testes Apenas)
+                        </a>
+                        <a ng-click="clickFetch()" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">refresh</i>
+                            Atualizar Dados
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Pendentes -->
+        <section class="mdl-layout__tab-panel" id="pendentes">
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop mdl-card mdl-shadow--4dp wide-card">
+                    <div class="mdl-card__title head-card">
+                        <h2 class="mdl-card__title-text">Pendentes</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <p><strong>Total de Assinaturas: {{graphPendentes.info.total}}</strong></p>
+                    </div>
+                    <div class="mdl-grid inner-grid">
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <canvas class="chart chart-horizontal-bar" chart-data="graphPendentes.data.data" chart-labels="graphPendentes.data.labels" chart-options="graphPendentes.data.options"></canvas>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <table class="mdl-data-table mdl-js-data-table wide-table">
+                                <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Assinantes (%)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(key, value) in graphPendentes.data.data_table">
+                                    <td>{{key}}</td>
+                                    <td>{{value}} <em>({{100*(value/graphPendentes.info.total) | number: 2}}%)</em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-textfield--align-right">
+                        <a ng-click="clickFetch()" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">refresh</i>
+                            Atualizar Dados
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Perdidas -->
+        <section class="mdl-layout__tab-panel" id="perdidas">
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop mdl-card mdl-shadow--4dp wide-card">
+                    <div class="mdl-card__title head-card">
+                        <h2 class="mdl-card__title-text">Perdidas</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <p><strong>Total de Assinaturas: {{graphPerdidas.info.total}}</strong></p>
+                    </div>
+                    <div class="mdl-grid inner-grid">
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <canvas class="chart chart-horizontal-bar" chart-data="graphPerdidas.data.data" chart-labels="graphPerdidas.data.labels" chart-options="graphPerdidas.data.options"></canvas>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <table class="mdl-data-table mdl-js-data-table wide-table">
+                                <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Assinantes (%)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(key, value) in graphPerdidas.data.data_table">
+                                    <td>{{key}}</td>
+                                    <td>{{value}} <em>({{100*(value/graphPerdidas.info.total) | number: 2}}%)</em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-textfield--align-right">
+                        <a ng-click="clickFetch()" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">refresh</i>
+                            Atualizar Dados
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <hr>
+    
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop">
+                    <h2 class="mdl-typography--display-1">
+                        Detalhes
+                    </h2>
+                </div>
+        
+                <div class="mdl-cell mdl-card mdl-shadow--2dp mdl-cell--6-col-desktop" ng-repeat="x in graphPerdidas.children">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">
+                            {{x.info.name}}
+                        </h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <table class="mdl-data-table mdl-js-data-table wide-table">
+                            <thead>
+                            <tr>
+                                <th>Assinatura</th>
+                                <th>Assinantes (%)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in x.subs.data_table">
+                                <td>{{key}}</td>
+                                <td>{{value}} <em>({{100*(value/x.info.total) | number: 2}}%)</em></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Conquistadas -->
+        <section class="mdl-layout__tab-panel" id="mantidas">
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop mdl-card mdl-shadow--4dp wide-card">
+                    <div class="mdl-card__title head-card">
+                        <h2 class="mdl-card__title-text">Mantidas</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <p><strong>Total de Assinaturas: {{graphMantidas.info.total}}</strong></p>
+                    </div>
+                    <div class="mdl-grid inner-grid">
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <canvas class="chart chart-horizontal-bar" chart-data="graphMantidas.data.data" chart-labels="graphMantidas.data.labels" chart-options="graphMantidas.data.options"></canvas>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <table class="mdl-data-table mdl-js-data-table wide-table">
+                                <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Assinantes (%)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(key, value) in graphMantidas.data.data_table">
+                                    <td>{{key}}</td>
+                                    <td>{{value}} <em>({{100*(value/graphMantidas.info.total) | number: 2}}%)</em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-textfield--align-right">
+                        <a ng-click="clickFetch()" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">refresh</i>
+                            Atualizar Dados
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr>
+    
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop">
+                    <h2 class="mdl-typography--display-1">
+                        Detalhes
+                    </h2>
+                </div>
+                
+                <div class="mdl-cell mdl-card mdl-shadow--2dp mdl-cell--6-col-desktop" ng-repeat="x in graphMantidas.children">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">
+                            {{x.info.name}}
+                        </h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <table class="mdl-data-table mdl-js-data-table wide-table">
+                            <thead>
+                            <tr>
+                                <th>Assinatura</th>
+                                <th>Assinantes (%)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in x.subs.data_table">
+                                <td>{{key}}</td>
+                                <td>{{value}} <em>({{100*(value/x.info.total) | number: 2}}%)</em></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Conquistadas -->
+        <section class="mdl-layout__tab-panel" id="conquistadas">
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop mdl-card mdl-shadow--4dp wide-card">
+                    <div class="mdl-card__title head-card">
+                        <h2 class="mdl-card__title-text">Conquistadas</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <p><strong>Total de Assinaturas: {{graphConquistadas.info.total}}</strong></p>
+                    </div>
+                    <div class="mdl-grid inner-grid">
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <canvas class="chart chart-horizontal-bar" chart-data="graphConquistadas.data.data" chart-labels="graphConquistadas.data.labels" chart-options="graphConquistadas.data.options"></canvas>
+                        </div>
+                        <div class="mdl-cell mdl-cell--6-col-desktop mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+                            <table class="mdl-data-table mdl-js-data-table wide-table">
+                                <thead>
+                                <tr>
+                                    <th>Índice</th>
+                                    <th>Assinantes (%)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="(key, value) in graphConquistadas.data.data_table">
+                                    <td>{{key}}</td>
+                                    <td>{{value}} <em>({{100*(value/graphConquistadas.info.total) | number: 2}}%)</em></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-textfield--align-right">
+                        <a ng-click="clickFetch()" href="#" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">refresh</i>
+                            Atualizar Dados
+                        </a>
+                    </div>
+                </div>
+            </div>
+    
+            <hr>
+    
+            <div class="mdl-grid contents">
+                <div class="mdl-cell mdl-cell--12-col-desktop">
+                    <h2 class="mdl-typography--display-1">
+                        Detalhes
+                    </h2>
+                </div>
+        
+                <div class="mdl-cell mdl-card mdl-shadow--2dp mdl-cell--6-col-desktop" ng-repeat="x in graphConquistadas.children">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">
+                            {{x.info.name}}
+                        </h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        <table class="mdl-data-table mdl-js-data-table wide-table">
+                            <thead>
+                            <tr>
+                                <th>Assinatura</th>
+                                <th>Assinantes (%)</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="(key, value) in x.subs.data_table">
+                                <td>{{key}}</td>
+                                <td>{{value}} <em>({{100*(value/x.info.total) | number: 2}}%)</em></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer class="mdl-mini-footer mdl-color--blue-900">
+        <div class="mdl-mini-footer__right-section">
+            <div class="mdl-logo">
+                ©2017 NomeDaEmpresa
+            </div>
+        </div>
+    </footer>
+</div>
+<!-- LAYOUT END -->
+
+<!-- JAVASCRIPT -->
+<script src="bower_components/material-design-lite/material.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/chart.js/dist/Chart.min.js"></script>
+<script src="bower_components/angular-chart.js/angular-chart.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/mainController.js"></script>
+<script src="scripts/dashboard.js"></script>
+
+</body>
+</html>

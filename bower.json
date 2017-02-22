@@ -1,0 +1,29 @@
+{
+  "name": "Exercicio",
+  "homepage": "https://github.com/yuigoto/exercicio-front-end-angularjs",
+  "authors": [
+    "Fabio Yuiti Goto <lab@yuiti.com.br>"
+  ],
+  "description": "Exercício para desenvolvimento de dashboard teste",
+  "main": "scripts/main.js",
+  "keywords": [
+    "Exercicio",
+    "front-end",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.1",
+    "material-design-lite": "^1.3.0",
+    "chart.js": "^2.5.0",
+    "angular-chart.js": "^1.1.1"
+  }
+}

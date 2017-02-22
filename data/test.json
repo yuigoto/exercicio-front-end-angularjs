@@ -1,0 +1,56 @@
+{
+    "cols": [
+        {
+            "id": "t",
+            "label": "Topping",
+            "type": "string"
+        },
+        {
+            "id": "s",
+            "label": "Slices",
+            "type": "number"
+        }
+    ],
+    "rows": [
+        {
+            "c": [
+                {
+                    "v": "Mushrooms"
+                },
+                {
+                    "v": 3
+                }
+            ]
+        },
+        {
+            "c": [
+                {
+                    "v": "Olives"
+                },
+                {
+                    "v": 31
+                }
+            ]
+        },
+        {
+            "c": [
+                {
+                    "v": "Zucchini"
+                },
+                {
+                    "v": 1
+                }
+            ]
+        },
+        {
+            "c": [
+                {
+                    "v": "Pepperoni"
+                },
+                {
+                    "v": 2
+                }
+            ]
+        }
+    ]
+}
