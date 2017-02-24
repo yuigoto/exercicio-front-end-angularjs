@@ -15,11 +15,11 @@
 <body data-ng-app="dashboardApp" data-ng-controller="baseController" data-ng-init="pullData()">
 
 <!-- APP INIT --->
-<div class="mdl-layout mdl-js-layout mdl-color--blue-50 mdl-layout--fixed-header mdl-layout--fixed-tabs mdl-layout--fixed-drawer">
+<div class="mdl-layout mdl-color--blue-50 mdl-js-layout mdl-layout--fixed-header mdl-layout--fixed-tabs mdl-layout--fixed-drawer">
     <!-- HEADER -->
-    <div class="mdl-layout__header mdl-color--blue-800 mdl-tabs">
+    <header class="mdl-layout__header mdl-color--blue-800 mdl-tabs">
         <!-- LOGO -->
-        <div class="mdl-layout__header-row">
+        <div class="mdl-layout__header-row mdl-layout__header--waterfall">
             <span class="mdl-layout-title">
                 Material Dashboard
             </span>
@@ -46,7 +46,7 @@
                 Pendentes
             </a>
         </div>
-    </div>
+    </header>
     
     <!-- DRAWER -->
     <div class="mdl-layout__drawer">
@@ -84,7 +84,7 @@
     </div>
     
     <!-- CONTENT -->
-    <div id="tabbed" class="mdl-layout__content mdl-color--blue-100">
+    <main id="tabbed" class="mdl-layout__content mdl-color--blue-100">
         <!-- HOME -->
         <div id="home" class="mdl-layout__tab-panel is-active">
             <div class="mdl-grid contents">
@@ -351,10 +351,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
     
-    <footer class="mdl-mini-footer mdl-color--blue-900">
-        <div class="mdl-mini-footer__right-section">
+    <footer class="mdl-mini-footer mdl-color--blue-400">
+        <div class="mdl-mini-footer--right-section">
             <div class="mdl-logo">
                 ©2017 NomeDaEmpresa
             </div>
@@ -362,7 +362,6 @@
     </footer>
 </div>
 <!-- APP END -->
-
 <!-- JAVASCRIPT -->
 <script src="bower_components/material-design-lite/material.min.js"></script>
 <script src="bower_components/angular/angular.min.js"></script>
@@ -372,6 +371,5 @@
 <script src="scripts/constant.js"></script>
 <script src="scripts/service/baseService.js"></script>
 <script src="scripts/controller/baseController.js"></script>
-
 </body>
 </html>

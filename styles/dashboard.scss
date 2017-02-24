@@ -14,6 +14,7 @@ html {
 }
 
 body {
+    min-height: 100vh;
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
@@ -51,6 +52,8 @@ body {
 
 .mdl-mini-footer {
     .mdl-logo {
-        margin: auto;
+        margin: -24px 0;
+        position: relative;
+        top: 8px;
     }
 }
