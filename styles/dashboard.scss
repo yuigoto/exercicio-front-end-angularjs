@@ -14,118 +14,19 @@ html {
 }
 
 body {
-    font-family: 'Open Sans', 'Segoe UI', 'Verdana', sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 .contents {
     max-width: 960px;
 }
 
-/* Material Design Extend
- * ------------------------------------------------------------------ */
-.mdl-layout__drawer {
-    .material-icons {
-        width: 40px;
-    }
-}
-
-.mdl-button {
-    .material-icons {
-        margin-right: 1rem;
-    }
-}
-
-.md-dark {
-    color: rgba( 0, 0, 0, .54 );
-    
-    &.md-inactive {
-        color: rgba( 0, 0, 0, .26 );
-    }
-}
-
-.mdl-mini-footer {
-    .mdl-logo {
-        margin: auto;
-    }
-}
-
-/* Material Design Custom
- * ------------------------------------------------------------------ */
-.mdl-layout__tab-bar {
-    padding: 0 0;
-    
-    &.vertical {
-        padding: 0 0;
-        
-        @media ( max-width: 640px ) {
-            height: inherit;
-            border-bottom: none;
-            border-right: 1px solid rgba( 10, 11, 49, 0.2 );
-            flex-direction: column;
-            -ms-flex-direction: column;
-            -webkit-flex-direction: column;
-            overflow: visible;
-            
-            .mdl-layout__tab {
-                width: 100%;
-                display: block;
-                clear: both;
-                box-sizing: border-box;
-                
-                &.is-active {
-                    border-right: 2px solid #ED462F;
-                }
-            }
-        }
-    }
-}
-
-.mdl-card__title {
-    &.head-card {
-        height: 112px;
-        background: url( 'http://placehold.it/960x200/3F51B5/5F71B5' ) center / cover;
-        
-        .mdl-card__title-text {
-            color: #fff;
-            font-size: 34px;
-        }
-    }
-}
-
-.wide-card {
-    width: 100%;
-    
-    .mdl-card__title,
-    .mdl-card__supporting-text {
-    }
-    
-    .mdl-card__title-text {
-        vertical-align: middle;
-        
-        span {
-            font-size: 18px;
-            line-height:inherit;
-            vertical-align: bottom;
-            display: inline;
-            clear: both;
-        }
-    }
+.contents {
+    max-width: 960px;
 }
 
 .wide-table {
     width: 100%;
-}
-
-.mdl-layout-title {
-    &.sidebar-name {
-        text-align: center;
-        margin: 0 auto;
-        padding: 0;
-    }
-}
-
-.inner-grid {
-    margin: 0 0;
 }
 
 .avatar-image {
@@ -145,5 +46,11 @@ body {
         right: -1000%;
         bottom: -1000%;
         left: -1000%;
+    }
+}
+
+.mdl-mini-footer {
+    .mdl-logo {
+        margin: auto;
     }
 }

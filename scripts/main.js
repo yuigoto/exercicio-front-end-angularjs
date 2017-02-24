@@ -1,20 +1,28 @@
 /**
- * EXERCÍCIO FRONT-END ANGULAR
+ * EXERCÍCIO ANGULAR :: Main
  * ======================================================================
- * Arquivo JS principal.
+ * JS principal da aplicação.
  * ----------------------------------------------------------------------
  * @package     br.com.yuiti.exercicioangular
- * @author      Fabio Yuiti Goto <lab@yuiti.com.br>
- * @version     0.0.1
+ * @author      Fabio Y. Goto <lab@yuiti.com.br>
+ * @version     0.0.2
  */
+// Inicializa app
+var gbDashboard = angular.module(
+    "dashboardApp",
+    [
+        "chart.js"
+    ]
+);
 
-// Inicializa App
-var app = angular.module( "dashboardApp", [] );
-
-// Diretiva teste
-app.directive( "testDirective", function() {
-    return {
-        restrict: "C",
-        template: "Test"
+// Diretiva de teste
+gbDashboard.directive(
+    "testDirective",
+    function()
+    {
+        return {
+            restrict: "C",
+            template: "This is just a test directive."
+        }
     }
-} );
+);
