@@ -18,7 +18,6 @@ gbDashboard.controller(
         $scope.loadOverview = function()
         {
             if ( !$rootScope.data ) {
-                console.log( 'A' );
                 baseService.fetchData().then(function (data) {
                     $rootScope.data = data;
                     
@@ -27,7 +26,6 @@ gbDashboard.controller(
                     );
                 });
             } else {
-                console.log( 'B' );
                 $scope.overviewData = baseService.overviewData(
                     $rootScope.data.children
                 );
@@ -37,7 +35,6 @@ gbDashboard.controller(
         $scope.loadMantidas = function()
         {
             if ( !$rootScope.data ) {
-                console.log( 'A' );
                 baseService.fetchData().then(function (data) {
                     $rootScope.data = data;
                 
@@ -47,7 +44,6 @@ gbDashboard.controller(
                     );
                 });
             } else {
-                console.log( 'B' );
                 $scope.mantidasData = baseService.mainFetch(
                     $rootScope.data.children,
                     BASE.DATA_TYPE.MANTIDAS
@@ -58,7 +54,6 @@ gbDashboard.controller(
         $scope.loadConquistadas = function()
         {
             if ( !$rootScope.data ) {
-                console.log( 'A' );
                 baseService.fetchData().then(function (data) {
                     $rootScope.data = data;
                 
@@ -68,7 +63,6 @@ gbDashboard.controller(
                     );
                 });
             } else {
-                console.log( 'B' );
                 $scope.conquistadasData = baseService.mainFetch(
                     $rootScope.data.children,
                     BASE.DATA_TYPE.CONQUISTADAS
@@ -79,7 +73,6 @@ gbDashboard.controller(
         $scope.loadPerdidas = function()
         {
             if ( !$rootScope.data ) {
-                console.log( 'A' );
                 baseService.fetchData().then(function (data) {
                     $rootScope.data = data;
                 
@@ -89,7 +82,6 @@ gbDashboard.controller(
                     );
                 });
             } else {
-                console.log( 'B' );
                 $scope.perdidasData = baseService.mainFetch(
                     $rootScope.data.children,
                     BASE.DATA_TYPE.PERDIDAS
@@ -100,7 +92,6 @@ gbDashboard.controller(
         $scope.loadPendentes = function()
         {
             if ( !$rootScope.data ) {
-                console.log( 'A' );
                 baseService.fetchData().then(function (data) {
                     $rootScope.data = data;
                 
@@ -110,7 +101,6 @@ gbDashboard.controller(
                     );
                 });
             } else {
-                console.log( 'B' );
                 $scope.pendentesData = baseService.mainFetch(
                     $rootScope.data.children,
                     BASE.DATA_TYPE.PENDENTES

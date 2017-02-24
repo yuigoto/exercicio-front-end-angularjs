@@ -112,8 +112,6 @@ gbDashboard.service(
                 main = this.childFetch( item );
             }
             
-            console.log( main );
-            
             return main;
         };
     
@@ -144,7 +142,6 @@ gbDashboard.service(
             main.info   = data.group.description;
     
             for ( var i in data.subs ) {
-                console.log(data.subs[i]);
                 main.data.push( data.subs[i].subscriberCount );
                 main.labels.push( data.subs[i].subscriptionName );
                 main.data_table[data.subs[i].subscriptionName] = data.subs[i].subscriberCount;
