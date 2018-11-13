@@ -25,3 +25,6 @@ yarn-error.log*
 .vscode/
 .brackets/
 .brackets.json
+
+# Package Lock, to avoid headaches
+package-lock.json
