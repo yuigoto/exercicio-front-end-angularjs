@@ -1,9 +1,10 @@
-Exercício de front-end com ~~Angular-JS~~ React
-===============================================
+# Exercício Front End com ~~AngularJS~~ React
 
 > Intro original: _Comprove seus super conhecimentos de javascript, de angular js e de frameworks css construindo um dashboard de página única que contenha informações de performance da empresa._
 
-Há quase um ano realizei este teste. Como foi algo que me trouxe muita coisa boa, tive a ideia de refazê-lo para ver o que mudou de lá pra cá.
+Em 2017 realizei este teste. Como foi algo que me trouxe muita coisa boa, tive a ideia de refazê-lo para ver o que mudou de lá pra cá.
+
+> ### AINDA BEM WIP! Nem comecei!
 
 Modificações ao projeto original que apresentei:
 
@@ -23,36 +24,48 @@ Observações:
 
 Mais informações no README original do `create-react-app` em [`README-CRA.md`](README-CRA.md).
 
------
-
-Descrição Original:
--------------------
-
-#### O dashboard
+### O dashboard
 
 Seu objetivo neste exercício é construir um dashboard que contenha dois índices de performance a a respectiva quebra por tipo de assinatura. Você deve encontrar as informações necessárias no JSON localizado na pasta "data" que deve ser consumido via angular js em simulação a uma chamada de api.
 
-Índices Obrigatórios:
-* Mantidas -> Quantas assinantes foram mantidas e por qual tipo de assinatura
-* Novas -> Quantas assinantes são novas na base e por qual tipo de assinataura
+**Índices Obrigatórios:**
 
-(Você pode mostar outros índices e quebras se achar mais informativo)
+- Mantidas -> Quantas assinantes foram mantidas e por qual tipo de assinatura
+- Novas -> Quantas assinantes são novas na base e por qual tipo de assinataura
 
-> 1 - Faça um fork neste repositório e altere na sua própria conta do github.
+    (Você pode mostar outros índices e quebras se achar mais informativo)
 
-> 2 - Adicione as dependencias de frameworks utilizando o bower. Graficos, gauges e painéis são bem-vindos.
+1. Faça um fork neste repositório e altere na sua própria conta do github.
 
-> 3 - Desenvolva seu código. É obrigatório que utilize angularjs para mostrar os dados. 
+2. Adicione as dependencias de frameworks utilizando o bower. Graficos, gauges e painéis são bem-vindos.
 
-> 4 - Faça um pull request ou nos avise que finalizou o seu maravilhoso dashboard.
+3. Desenvolva seu código. É obrigatório que utilize angularjs para mostrar os dados.
+
+4. Faça um pull request ou nos avise que finalizou o seu maravilhoso dashboard.
 
 ... um exemplo de dashboard para estimular suas idéias ...
 ![dashboard example](https://blog.kissmetrics.com/wp-content/uploads/2013/09/dashboard-widget-types.png)
 
------
+> _Solução original (bower/angularjs) realizado em 02/2017_;
 
-Autor
------
+----------------------------------------------------------------------
 
-* **Fabio Yuiti Goto** ([lab@yuiti.com.br](mailto:lab@yuiti.com.br));
-	* _Solução original (bower/angularjs) realizado em 02/2017_;
+## Autores
+
+Veja `AUTHORS.md` para maiores informações.
+
+----------------------------------------------------------------------
+
+## Contribuições
+
+Quer contribuir? Adoraríamos saber como poderia fazê-lo! Contate-nos em [**lab@yuiti.dev**][contact] ou apenas nos envie o seu pull request!
+
+----------------------------------------------------------------------
+
+## Licença
+
+Este projeto está licenciado sob a `Licença GPLv3`. Veja o arquivo `LICENSE.md` para maiores detalhes sobre a licença (em inglês).
+
+----------------------------------------------------------------------
+
+_©2020 Fabio Y. Goto_
